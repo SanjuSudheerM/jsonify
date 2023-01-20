@@ -1,9 +1,9 @@
 import './App.css';
-import {JSONEditor} from './Editor';
 import Card from '@mui/material/Card';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import {Header} from "./components/Header";
+import { JsonTab }  from './components/Tab';
+import { JSONEditor} from "./components/Editor";
 
 function App() {
     return (
@@ -13,6 +13,7 @@ function App() {
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Card variant="outlined">
+                            <JsonTab/>
                             <JSONEditor/>
                         </Card>
                     </Grid>

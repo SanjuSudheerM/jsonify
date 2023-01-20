@@ -1,8 +1,12 @@
-import Editor, {useMonaco} from "@monaco-editor/react";
-import {useRef} from "react";
+import Editor from "@monaco-editor/react";
+import {useContext, useEffect} from "react";
+import {TabContext} from "../contexts/tabContext";
+
 export function JSONEditor() {
-    const monaco = useMonaco()
-    const editorRef = useRef(null);
+//    const monaco = useMonaco()
+//    const editorRef = useRef(null);
+
+    const {currentTab} = useContext(TabContext);
 
     const options = {
         lineHeight: 25,
@@ -14,10 +18,14 @@ export function JSONEditor() {
         formatOnPaste: true
     }
 
+    useEffect(() => {
+        console.log('tab changed', currentTab)
+    }, [currentTab])
+
     return (
         <div className="editor">
             <Editor
-                height="80vh"
+                height="70vh"
                 defaultLanguage="json"
                 defaultValue=""
                 options={options}
