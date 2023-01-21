@@ -41,13 +41,35 @@ code {
     position: relative;
     padding-left: 45px;
     padding-right: 80px;
-
+    height: 40px;
+    border-bottom: 1px solid #ddd;
 }
+
 .tab-list {
     display: flex;
     align-items: center;
     justify-content: start;
-/*    overflow-x: auto;*/
+    overflow-x: auto;
+
+}
+
+.hide-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    width: 1px;
+}
+
+.hide-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.hide-scrollbar::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    height: 1;
 }
 
 .tab-list-wrapper .tab {
@@ -58,7 +80,7 @@ code {
     align-items: center;
     justify-content: space-between;
     width: 150px;
-    flex-shrink:0;
+    flex-shrink: 0;
     position: relative;
     border-right: 1px solid #f5f5f5;
 }
@@ -73,6 +95,7 @@ code {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
 .tab .tab-icon {
     border-radius: 100%;
     background: #f5f5f5;
@@ -82,10 +105,12 @@ code {
     align-items: center;
     justify-content: center;
 }
+
 .tab .tab-icon:hover {
     background-color: #1976D2;
     color: #fff;
 }
+
 .tab .tab-icon em.material-icons {
     font-size: 14px;
 }
@@ -104,6 +129,7 @@ code {
 .tab.active {
     font-weight: 500;
 }
+
 .tab.active::before {
     width: 100%;
 }
@@ -124,12 +150,14 @@ code {
     background-color: #fff;
     display: flex;
     align-items: center;
-    box-shadow: -2px 0px 3px 4px rgba(0,0,0,0.09);
+    box-shadow: -2px 0px 3px 4px rgba(0, 0, 0, 0.09);
     cursor: pointer;
 }
+
 .tab-navigation.right {
     right: 45px;
 }
+
 .tab-navigation.left {
     left: 0;
 }

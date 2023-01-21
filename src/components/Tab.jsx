@@ -111,12 +111,10 @@ export function JsonTab() {
         console.log(currentTab, id)
 
         jsonDb.deleteRecord(id).then(res => {
-            console.log('remove :', id, res)
             const newTabList = tabList.filter(res => res.id !== id);
 
             if (currentTab.id === id && tabList.length > 1) {
                 handleChange(tabList[0])
-                console.log(tabList[0].tabId)
             }
             if (newTabList.length === 0) {
                 const newTab = createNewTab()
@@ -137,7 +135,7 @@ export function JsonTab() {
     return (
 
         <div className='tab-list-wrapper'>
-            <div className="tab-list" ref={tabArea}>
+            <div className="tab-list hide-scrollbar" ref={tabArea}>
                 {tabList.map((tab) => <div className={`tab ${tab?.tabId === currentTab?.tabId ? 'active' : ''}`}
                                            key={tab?.tabId} onClick={() => handleChange(tab)}
                                            id={`tab-${tab.tabId}`}>
