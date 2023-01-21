@@ -4,11 +4,14 @@ export const DBConfig = {
     objectStoresMeta: [
         {
             store: 'json',
-            storeConfig: { keyPath: 'id',name: 'id', autoIncrement: false },
+            storeConfig: {keyPath: 'id', name: 'id', autoIncrement: false},
+
             storeSchema: [
-                { name: 'data', keypath: 'data', options: {unique: false} },
-                { name: 'tabId', keypath: 'tabId', options: { unique: true } },
-                { name: 'name', keypath: 'name', options: { unique: false } },
+                {name: 'data', keypath: 'data', options: {unique: false}},
+                {name: 'tabId', keypath: 'tabId', options: {unique: true}},
+                {name: 'name', keypath: 'name', options: {unique: false}},
+                {name: 'createdAt', keypath: 'createdAt', options: { unique: false}},
+                {name: 'updatedAt', keypath: 'updatedAt', options: { unique: false}},
             ]
         },
         {

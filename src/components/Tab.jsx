@@ -36,10 +36,11 @@ export function JsonTab() {
     const getAllTabs = async () => {
         try {
             const tabItems = await jsonDb.getAll();
+            tabItems.sort((a, b) => a.createdAt - b.createdAt);
             if (tabItems.length > 0) {
                 setTabList(tabItems);
             } else {
-                const newTab = getNewTab();
+                const newTab = {...getNewTab(), createdAt: new Date().getTime(), updatedAt: new Date().getTime()};
                 setTabList([newTab])
                 setCurrentTab(newTab)
                 addCurrentTab(newTab)
@@ -71,13 +72,20 @@ export function JsonTab() {
     }
 
     const createNewTab = () => {
-        const newTab = getNewTab()
+        const newTab = {...getNewTab(), createdAt: new Date().getTime(), updatedAt: new Date().getTime()};
         addCurrentTab(newTab);
         return newTab;
     }
 
     const addCurrentTab = (tab) => {
-        jsonDb.add({data: '{}', name: tab.name, tabId: tab.tabId, id: `${userId}-${tab.tabId}`}).then(
+        jsonDb.add({
+            data: '{}',
+            name: tab.name,
+            tabId: tab.tabId,
+            id: `${userId}-${tab.tabId}`,
+            createdAt: tab.createdAt,
+            updatedAt: tab.updatedAt
+        }).then(
             res => {
                 console.log('success', res)
                 setTabList([...tabList, tab])
@@ -91,7 +99,7 @@ export function JsonTab() {
     const getNewTab = useCallback(function () {
         const tabId = uuidv4().substring(0, 8)
         return {
-            name: 'Untitled Tab',
+            name: `Untitled Tab`,
             tabId,
             data: '{}',
             id: `${userId}-${tabId}`
@@ -100,17 +108,17 @@ export function JsonTab() {
 
 
     const removeTab = (id) => {
-    console.log(currentTab, id)
+        console.log(currentTab, id)
 
         jsonDb.deleteRecord(id).then(res => {
             console.log('remove :', id, res)
             const newTabList = tabList.filter(res => res.id !== id);
-            
-            if(currentTab.id === id && tabList.length > 1) {
+
+            if (currentTab.id === id && tabList.length > 1) {
                 handleChange(tabList[0])
                 console.log(tabList[0].tabId)
             }
-            if(newTabList.length === 0) {
+            if (newTabList.length === 0) {
                 const newTab = createNewTab()
                 handleChange(newTab)
             }
@@ -130,10 +138,10 @@ export function JsonTab() {
 
         <div className='tab-list-wrapper'>
             <div className="tab-list" ref={tabArea}>
-                {tabList.map((tab, index) => <div className={`tab ${tab?.tabId === currentTab?.tabId ? 'active' : ''}`}
-                                                  key={tab?.tabId} onClick={() => handleChange(tab)}
-                                                  id={`tab-${tab.tabId}`}>
-                    <span className="tab-name">{tab?.name} {index + 1}</span>
+                {tabList.map((tab) => <div className={`tab ${tab?.tabId === currentTab?.tabId ? 'active' : ''}`}
+                                           key={tab?.tabId} onClick={() => handleChange(tab)}
+                                           id={`tab-${tab.tabId}`}>
+                    <span className="tab-name">{tab?.name} {tab?.order}</span>
                     <span className="tab-icon" onClick={() => removeTab(tab.id)}>
                     <em className="material-icons">close</em>
                 </span>

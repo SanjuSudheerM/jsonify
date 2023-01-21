@@ -4,12 +4,11 @@ import {TabContext} from "../contexts/tabContext";
 import {useIndexedDB} from 'react-indexed-db';
 
 export function JSONEditor() {
-//    const monaco = useMonaco()
-//    const editorRef = useRef(null);
+
 
     const {currentTab} = useContext(TabContext);
     const jsonDb = useIndexedDB('json')
-    const [currentEditorData, setCurrentEditorData] = useState(null)
+    const [currentEditorData, setCurrentEditorData] = useState('')
 
     const options = {
         lineHeight: 25,
@@ -20,14 +19,17 @@ export function JSONEditor() {
         autoIndent: 'advanced',
         formatOnPaste: true
     }
-  
+
 
     useEffect(() => {
             if (currentTab) {
                 jsonDb.getByID(currentTab?.id).then(res => {
                     const finalEditorData = res ? res?.data : currentTab?.data;
-                    setCurrentEditorData('')
-                    setCurrentEditorData(finalEditorData);
+
+                    setCurrentEditorData('{{}}');
+                    setTimeout(() => {
+                        setCurrentEditorData(finalEditorData);
+                    }, 0)
                 }, err => {
                     console.error(err)
                 })
@@ -37,12 +39,11 @@ export function JSONEditor() {
     )
 
     function updateData(value) {
-        if (currentTab && value !== currentEditorData) {
-            const data = {...currentTab, data: value};
+        if (currentTab) {
+            const data = {...currentTab, data: value, updatedAt: new Date().getTime()};
             console.log('update data on editor ==>', data)
             jsonDb.update(data).then(res => {
                 console.log(res)
-                setCurrentEditorData(value)
             }, err => {
                 console.error(err)
             })
