@@ -4,14 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {TabProvider} from "./contexts/tabContext";
+import {UserContextProvider} from './contexts/userContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <React.StrictMode>
+    <UserContextProvider>
         <TabProvider>
             <App/>
         </TabProvider>
-    </React.StrictMode>
+    </UserContextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
