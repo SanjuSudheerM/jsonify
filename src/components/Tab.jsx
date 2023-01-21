@@ -101,9 +101,18 @@ export function JsonTab() {
         <div className='tab-list'>
             {tabList.map(tab => <div className={`tab ${tab?.tabId === currentTab?.tabId ? 'active' : ''}`}
                                      key={tab?.tabId} onClick={() => handleChange(tab)}>
-                <span>{tab?.name}</span>
+                <span className="tab-name">{tab?.name}</span>
+                <span className="tab-icon">
+                    <em className="material-icons">close</em>
+                </span>
             </div>)}
-            <div className='tab' onClick={createNewTab}>
+            <div className='tab-navigation left'>
+                <em className='material-icons'>chevron_left</em>
+            </div>
+            <div className='tab-navigation right'>
+                <em className='material-icons'>chevron_right</em>
+            </div>
+            <div className='tab static' onClick={createNewTab}>
                 <em className='material-icons'>add</em>
             </div>
         </div>
