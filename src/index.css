@@ -6,6 +6,7 @@ body {
     background-image: linear-gradient(to right top, #f8f4f6, #f6f3f6, #f3f2f5, #f0f1f4, #edf0f3, #ebf0f3, #eaf1f1, #eaf1ef, #edf2ed, #f2f2eb, #f9f1eb, #fef1ee);
     height: 100%;
     width: 100%;
+    min-height: 100vh;
     padding: 0;
 }
 
@@ -36,15 +37,20 @@ code {
     padding: 0 0 30px 0;
 }
 
+.tab-list-wrapper {
+    position: relative;
+    padding-left: 45px;
+    padding-right: 80px;
+
+}
 .tab-list {
     display: flex;
     align-items: center;
     justify-content: start;
-    position: relative;
 /*    overflow-x: auto;*/
 }
 
-.tab-list .tab {
+.tab-list-wrapper .tab {
     padding: 10px;
     font-size: 14px;
     cursor: pointer;
@@ -57,7 +63,7 @@ code {
     border-right: 1px solid #f5f5f5;
 }
 
-.tab-list .tab:hover {
+.tab-list-wrapper .tab:hover {
     background: #f5f5f5;
 }
 
@@ -108,12 +114,12 @@ code {
     background-color: #fff;
     width: auto;
     border-left: 1px solid #ddd;
-
+    top: 0;
 }
 
 .tab-navigation {
     position: absolute;
-
+    top: 0;
     padding: 10px 5px;
     background-color: #fff;
     display: flex;

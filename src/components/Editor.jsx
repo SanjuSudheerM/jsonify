@@ -20,10 +20,7 @@ export function JSONEditor() {
         autoIndent: 'advanced',
         formatOnPaste: true
     }
-
-    useEffect(() => {
-        console.log('editor data has been changed', currentEditorData)
-    }, [currentEditorData])
+  
 
     useEffect(() => {
             if (currentTab) {

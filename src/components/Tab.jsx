@@ -1,4 +1,4 @@
-import {useCallback, useContext, useEffect, useState} from "react";
+import {useCallback, useContext, useEffect, useRef, useState} from "react";
 import {TabContext} from "../contexts/tabContext";
 import {v4 as uuidv4} from 'uuid';
 import {useIndexedDB} from 'react-indexed-db';
@@ -11,6 +11,7 @@ export function JsonTab() {
     const [tabList, setTabList] = useState([])
     const jsonDb = useIndexedDB('json');
     const activeTabDb = useIndexedDB('activeTab');
+    const tabArea = useRef(null)
 
     useEffect(() => {
         if (userId) {
@@ -96,20 +97,42 @@ export function JsonTab() {
         }
     }, [userId])
 
+
+    const removeTab = (id) => {
+        jsonDb.deleteRecord(id).then(res => {
+            console.log('remove :', id, res)
+            const newTabList = tabList.filter(res => res.id !== id);
+            setTabList(newTabList);
+        }, err => {
+            console.error('remove failed: ', id, err)
+        })
+    }
+
+    const navigateTab = (direction) => {
+        console.log(tabArea)
+        tabArea.current.scrollLeft += 150;
+//        const defaultScrollOption = {behavior:"smooth", block: "end", inline:"nearest"};
+//        const value = direction === 0 ? {left: 150} : {right: 150};
+//        tabArea.current.scrollTo()
+    }
+
     return (
 
-        <div className='tab-list'>
-            {tabList.map(tab => <div className={`tab ${tab?.tabId === currentTab?.tabId ? 'active' : ''}`}
-                                     key={tab?.tabId} onClick={() => handleChange(tab)}>
-                <span className="tab-name">{tab?.name}</span>
-                <span className="tab-icon">
+        <div className='tab-list-wrapper'>
+            <div className="tab-list" ref={tabArea}>
+                {tabList.map((tab, index) => <div className={`tab ${tab?.tabId === currentTab?.tabId ? 'active' : ''}`}
+                                                  key={tab?.tabId} onClick={() => handleChange(tab)}
+                                                  id={`tab-${tab.tabId}`}>
+                    <span className="tab-name">{tab?.name} {index + 1}</span>
+                    <span className="tab-icon" onClick={() => removeTab(tab.id)}>
                     <em className="material-icons">close</em>
                 </span>
-            </div>)}
-            <div className='tab-navigation left'>
+                </div>)}
+            </div>
+            <div className='tab-navigation left' onClick={() => navigateTab(0)}>
                 <em className='material-icons'>chevron_left</em>
             </div>
-            <div className='tab-navigation right'>
+            <div className='tab-navigation right' onClick={() => navigateTab(1)}>
                 <em className='material-icons'>chevron_right</em>
             </div>
             <div className='tab static' onClick={createNewTab}>
