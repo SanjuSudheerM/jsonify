@@ -10,56 +10,91 @@ export function JsonTab() {
     const {userId} = useContext(UserContext);
     const [tabList, setTabList] = useState([])
     const jsonDb = useIndexedDB('json');
-//    const activeTabDb = useIndexedDB('activeTab');
+    const activeTabDb = useIndexedDB('activeTab');
 
     useEffect(() => {
-        getAllTabs().then()
-    }, [])
+        if (userId) {
+            getAllTabs();
+        }
+    }, [userId])
+
+    useEffect(() => {
+        console.log('getting current tab', userId)
+        activeTabDb.getByID(userId).then(res => {
+            console.log('getting current tab response: ', res, currentTab, tabList)
+            if (res) {
+                const currentTab = tabList.filter(tab => tab.tabId === res.tabId)[0]
+                console.log('current tab on filter: ', currentTab)
+                setCurrentTab(currentTab)
+            }
+        }, err => {
+            console.error(err)
+        })
+    }, [tabList, userId])
 
     const getAllTabs = async () => {
         try {
             const tabItems = await jsonDb.getAll();
-            console.log(tabItems)
             if (tabItems.length > 0) {
                 setTabList(tabItems);
-                setCurrentTab(tabItems[0])
             } else {
                 const newTab = getNewTab();
                 setTabList([newTab])
                 setCurrentTab(newTab)
+                addCurrentTab(newTab)
+                setCurrentForNewCustomer(newTab)
             }
+
         } catch (e) {
-            console.log('error', e)
+            console.error('error', e)
         }
+    }
+
+
+    const setCurrentForNewCustomer = (currentTab) => {
+        activeTabDb.add({tabId: currentTab?.tabId, id: userId}).then(res => {
+            console.log(res)
+        }, err => {
+            console.error(err)
+        });
     }
 
 
     function handleChange(tab) {
-        setCurrentTab(tab);
+        activeTabDb.update({tabId: tab.tabId, id: userId}).then(res => {
+            console.log(res)
+            setCurrentTab(tab);
+        }, err => {
+            console.error(err)
+        });
     }
 
     const createNewTab = () => {
         const newTab = getNewTab()
-        setTabList([...tabList, newTab])
+        addCurrentTab(newTab);
+    }
 
-        jsonDb.add({data: '{}', name: newTab.name, tabId: newTab.tabId}).then(
+    const addCurrentTab = (tab) => {
+        jsonDb.add({data: '{}', name: tab.name, tabId: tab.tabId, id: `${userId}-${tab.tabId}`}).then(
             res => {
                 console.log('success', res)
+                setTabList([...tabList, tab])
             }, err => {
                 console.error(err)
             }
         )
-
     }
 
 
     const getNewTab = useCallback(function () {
+        const tabId = uuidv4().substring(0, 8)
         return {
             name: 'Untitled Tab',
-            tabId: uuidv4().substring(0, 8),
-            data: '{}'
+            tabId,
+            data: '{}',
+            id: `${userId}-${tabId}`
         }
-    }, [])
+    }, [userId])
 
     return (
 

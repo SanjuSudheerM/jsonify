@@ -4,7 +4,7 @@ export const DBConfig = {
     objectStoresMeta: [
         {
             store: 'json',
-            storeConfig: { keyPath: 'id', autoIncrement: true },
+            storeConfig: { keyPath: 'id',name: 'id', autoIncrement: false },
             storeSchema: [
                 { name: 'data', keypath: 'data', options: {unique: false} },
                 { name: 'tabId', keypath: 'tabId', options: { unique: true } },
@@ -13,10 +13,10 @@ export const DBConfig = {
         },
         {
             store: 'activeTab',
-            storeConfig: {keyPath: 'id', autoIncrement: true},
+            storeConfig: {keyPath: 'id', name: 'id', autoIncrement: false},
             storeSchema: [
                 {name: 'tabId', keypath: 'tabId', options: {unique: true}},
-                {name: 'userId', keypath: 'userId', options: {unique: true}}
+
             ]
         }
 

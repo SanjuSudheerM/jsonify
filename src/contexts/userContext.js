@@ -7,10 +7,11 @@ export const UserContext = createContext({
 })
 
 export const UserContextProvider = ({children}) => {
-    const [userId, setUserId] = useState(null)
+    const [userId, setUserId] = useState('')
     const value = {userId, setUserId};
     useEffect(() => {
         const currentUser = localStorage.getItem('AnoclapJsonifyUser');
+
         if (currentUser) {
             setUserId(currentUser);
         } else {
@@ -18,6 +19,10 @@ export const UserContextProvider = ({children}) => {
             localStorage.setItem('AnoclapJsonifyUser', newUserId)
             setUserId(newUserId)
         }
+        setTimeout(() => {
+            console.log(currentUser, userId)
+        }, 100)
+
     }, [])
     return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }

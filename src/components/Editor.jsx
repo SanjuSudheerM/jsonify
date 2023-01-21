@@ -9,7 +9,7 @@ export function JSONEditor() {
 
     const {currentTab} = useContext(TabContext);
     const jsonDb = useIndexedDB('json')
-    const [currentEditorData, setCurrentEditorData] = useState('')
+    const [currentEditorData, setCurrentEditorData] = useState(null)
 
     const options = {
         lineHeight: 25,
@@ -22,27 +22,34 @@ export function JSONEditor() {
     }
 
     useEffect(() => {
-            console.log('tab changed', currentTab);
-            if (currentTab?.id) {
+        console.log('editor data has been changed', currentEditorData)
+    }, [currentEditorData])
+
+    useEffect(() => {
+            if (currentTab) {
                 jsonDb.getByID(currentTab?.id).then(res => {
-                    setCurrentEditorData(res.data);
+                    const finalEditorData = res ? res?.data : currentTab?.data;
+                    setCurrentEditorData('')
+                    setCurrentEditorData(finalEditorData);
                 }, err => {
                     console.error(err)
                 })
-            } else {
-                setCurrentEditorData(currentTab?.data)
             }
         },
         [currentTab]
     )
 
     function updateData(value) {
-        const data = {...currentTab, data: value};
-        jsonDb.update(data).then(res => {
-            console.log(res)
-        }, err => {
-            console.error(err)
-        })
+        if (currentTab && value !== currentEditorData) {
+            const data = {...currentTab, data: value};
+            console.log('update data on editor ==>', data)
+            jsonDb.update(data).then(res => {
+                console.log(res)
+                setCurrentEditorData(value)
+            }, err => {
+                console.error(err)
+            })
+        }
     }
 
     return (
