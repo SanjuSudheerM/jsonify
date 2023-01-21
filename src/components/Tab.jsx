@@ -73,6 +73,7 @@ export function JsonTab() {
     const createNewTab = () => {
         const newTab = getNewTab()
         addCurrentTab(newTab);
+        return newTab;
     }
 
     const addCurrentTab = (tab) => {
@@ -99,21 +100,30 @@ export function JsonTab() {
 
 
     const removeTab = (id) => {
+    console.log(currentTab, id)
+
         jsonDb.deleteRecord(id).then(res => {
             console.log('remove :', id, res)
             const newTabList = tabList.filter(res => res.id !== id);
-            setTabList(newTabList);
+            
+            if(currentTab.id === id && tabList.length > 1) {
+                handleChange(tabList[0])
+                console.log(tabList[0].tabId)
+            }
+            if(newTabList.length === 0) {
+                const newTab = createNewTab()
+                handleChange(newTab)
+            }
+            getAllTabs();
+
         }, err => {
             console.error('remove failed: ', id, err)
         })
     }
 
     const navigateTab = (direction) => {
-        console.log(tabArea)
-        tabArea.current.scrollLeft += 150;
-//        const defaultScrollOption = {behavior:"smooth", block: "end", inline:"nearest"};
-//        const value = direction === 0 ? {left: 150} : {right: 150};
-//        tabArea.current.scrollTo()
+        const value = direction === 0 ? -150 : 150;
+        tabArea.current.scrollLeft += value;
     }
 
     return (
