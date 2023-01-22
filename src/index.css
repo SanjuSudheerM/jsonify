@@ -56,7 +56,7 @@ code {
 .tab-list {
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     overflow-x: auto;
 
 }
