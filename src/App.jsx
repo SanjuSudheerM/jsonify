@@ -1,7 +1,6 @@
 import './App.css';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
-import {Header} from "./components/Header";
 import {JsonTab} from './components/Tab';
 import {JSONEditor} from "./components/Editor";
 import {DBConfig} from "./config/DBConfig";
@@ -11,13 +10,12 @@ import {ErrorBoundary} from './ErrorBoundary'
 function App() {
     initDB(DBConfig)
 
-
     return (
         <div>
             <ErrorBoundary>
-
-                <Header/>
                 <div className="app-wrapper container">
+                    <h1 className="mega-title">JSONIFY</h1>
+                    <h5 className="sub-title">One another JSON Formatter</h5>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <Card variant="outlined">
@@ -25,7 +23,6 @@ function App() {
                                 <JSONEditor/>
                             </Card>
                         </Grid>
-
                     </Grid>
                 </div>
             </ErrorBoundary>

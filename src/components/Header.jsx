@@ -5,7 +5,7 @@ export function Header() {
     return (
         <div className="container">
             <header className="header-wrapper">
-                <h2>JSON Formatter</h2>
+                <h2>JSONIFY</h2>
                 <Button variant="contained">Format JSON</Button>
             </header>
         </div>
