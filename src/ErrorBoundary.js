@@ -16,6 +16,7 @@ export class ErrorBoundary extends React.Component {
 //        logErrorToMyService(error, errorInfo);
     }
 
+    // TODO: update the error handler
     render() {
         if (this.state.hasError) {
             // You can render any custom fallback UI

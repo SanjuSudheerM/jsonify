@@ -18,6 +18,10 @@ body {
     padding: 0;
 }
 
+.app-wrapper {
+    padding: 30px;
+}
+
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
