@@ -20,12 +20,12 @@ export function JsonTab() {
     }, [userId])
 
     useEffect(() => {
-        console.log('getting current tab', userId)
+//        console.log('getting current tab', userId)
         activeTabDb.getByID(userId).then(res => {
-            console.log('getting current tab response: ', res, currentTab, tabList)
+//            console.log('getting current tab response: ', res, currentTab, tabList)
             if (res) {
                 const currentTab = tabList.filter(tab => tab.tabId === res.tabId)[0]
-                console.log('current tab on filter: ', currentTab)
+//                console.log('current tab on filter: ', currentTab)
                 setCurrentTab(currentTab)
             }
         }, err => {

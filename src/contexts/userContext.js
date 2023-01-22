@@ -19,9 +19,7 @@ export const UserContextProvider = ({children}) => {
             localStorage.setItem('AnoclapJsonifyUser', newUserId)
             setUserId(newUserId)
         }
-        setTimeout(() => {
-            console.log(currentUser, userId)
-        }, 100)
+       
 
     }, [userId])
     return <UserContext.Provider value={value}>{children}</UserContext.Provider>
