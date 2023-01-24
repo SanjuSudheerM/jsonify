@@ -14,7 +14,7 @@ function App() {
             <ErrorBoundary>
                 <div className="app-wrapper container">
                     <h1 className="mega-title">JSONIFY</h1>
-                    <h5 className="sub-title">One another JSON Formatter</h5>
+                    <h5 className="sub-title">A Completely offline JSON Formatter</h5>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <Card variant="outlined">

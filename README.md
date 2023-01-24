@@ -2,4 +2,4 @@
 <img src='https://jsonify.anoclap.com/image.png'/>
 
 # JSONIFY
-One another JSON formatter based on Monaco Editor
+Another JSON formatter that is completely offline and offers a developer-friendly interface
