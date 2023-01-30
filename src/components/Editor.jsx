@@ -53,7 +53,7 @@ export function JSONEditor() {
     return (
         <div className="editor">
             <Editor
-                height="70vh"
+                height="80vh"
                 defaultLanguage="json"
                 value={currentEditorData}
                 options={options}

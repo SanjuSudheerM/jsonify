@@ -33,15 +33,22 @@ code {
 }
 
 .header-wrapper {
-    padding: 15px;
+    padding: 15px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 2px solid #ddd;
+/*    border-bottom: 2px solid #ddd;*/
 }
 
 .header-wrapper h2 {
     margin: 0;
+    background: #f12711; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f5af19, #f12711); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .editor {
@@ -208,4 +215,18 @@ code {
     .mega-title {
         font-size: 4.5rem;
     }
+}
+
+.footer-wrapper {
+    background: #1976D2;
+    color: #fff;
+    padding: 50px 0;
+}
+
+.footer-wrapper .footer-description {
+    font-size: 14px;
+    line-height: 24px;
+}
+a.link {
+    text-decoration: none;
 }

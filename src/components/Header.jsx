@@ -1,4 +1,5 @@
 import Button from '@mui/material/Button';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 export function Header() {
 
@@ -6,7 +7,9 @@ export function Header() {
         <div className="container">
             <header className="header-wrapper">
                 <h2>JSONIFY</h2>
-                <Button variant="contained">Format JSON</Button>
+                <a href="https://github.com/sanjusudheerm/jsonify" target="_blank" className="link">
+                    <GitHubIcon/>
+                </a>
             </header>
         </div>
     );

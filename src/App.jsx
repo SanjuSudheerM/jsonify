@@ -5,6 +5,8 @@ import {JSONEditor} from "./components/Editor";
 import {DBConfig} from "./config/DBConfig";
 import {initDB} from 'react-indexed-db';
 import {ErrorBoundary} from './ErrorBoundary'
+import {Header} from "./components/Header";
+import {Footer} from "./components/Footer";
 
 function App() {
     initDB(DBConfig)
@@ -12,9 +14,8 @@ function App() {
     return (
         <div>
             <ErrorBoundary>
+                <Header/>
                 <div className="app-wrapper container">
-                    <h1 className="mega-title">JSONIFY</h1>
-                    <h5 className="sub-title">A Completely offline JSON Formatter</h5>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <Card variant="outlined">
@@ -24,6 +25,7 @@ function App() {
                         </Grid>
                     </Grid>
                 </div>
+                <Footer/>
             </ErrorBoundary>
         </div>
     );
