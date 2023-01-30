@@ -5,12 +5,12 @@ body {
     -moz-osx-font-smoothing: grayscale;
     background-image: linear-gradient(to right top, #f8f4f6, #f6f3f6, #f3f2f5, #f0f1f4, #edf0f3, #ebf0f3, #eaf1f1, #eaf1ef, #edf2ed, #f2f2eb, #f9f1eb, #fef1ee);
 
-/*background: #0f0c29;  !* fallback for old browsers *!*/
-/*background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  !* Chrome 10-25, Safari 5.1-6 *!*/
-/*background: linear-gradient(to right, #24243e, #302b63, #0f0c29); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
+    /*background: #0f0c29;  !* fallback for old browsers *!*/
+    /*background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  !* Chrome 10-25, Safari 5.1-6 *!*/
+    /*background: linear-gradient(to right, #24243e, #302b63, #0f0c29); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
 
 
-/*background: #000;*/
+    /*background: #000;*/
 
     height: 100%;
     width: 100%;
@@ -37,7 +37,7 @@ code {
     display: flex;
     align-items: center;
     justify-content: space-between;
-/*    border-bottom: 2px solid #ddd;*/
+    /*    border-bottom: 2px solid #ddd;*/
 }
 
 .header-wrapper h2 {
@@ -218,7 +218,10 @@ code {
 }
 
 .footer-wrapper {
-    background: #1976D2;
+    background: #000428; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #004e92, #000428); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
     color: #fff;
     padding: 50px 0;
 }
@@ -227,6 +230,7 @@ code {
     font-size: 14px;
     line-height: 24px;
 }
+
 a.link {
     text-decoration: none;
 }
