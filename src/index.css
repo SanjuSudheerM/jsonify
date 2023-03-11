@@ -52,6 +52,16 @@ code {
     -webkit-text-fill-color: transparent;
 }
 
+.header-wrapper .menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.header-wrapper .menu span {
+    padding: 0 16px;
+    cursor: pointer;
+}
+
 .editor {
     background: #fff;
     padding: 0 0 30px 0;
