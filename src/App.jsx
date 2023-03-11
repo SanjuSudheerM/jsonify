@@ -12,13 +12,11 @@ import { useState } from "react";
 
 function App() {
   try {
-    console.log(DBConfig);
     initDB(DBConfig);
   } catch (e) {
     console.log(e);
   }
   const [open, setOpen] = useState(false);
-  const [tabId, setTabId] = useState(null);
 
   const openTabNameModal = () => {
     setOpen(true);

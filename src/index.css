@@ -30,6 +30,7 @@ code {
 .container {
     max-width: 1280px;
     margin: 0 auto;
+    width: 80%;
 }
 
 .header-wrapper {
@@ -233,4 +234,7 @@ code {
 
 a.link {
     text-decoration: none;
+}
+a.link:active {
+    color: black;
 }

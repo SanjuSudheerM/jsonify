@@ -26,7 +26,7 @@ export function JSONEditor() {
                 jsonDb.getByID(currentTab?.id).then(res => {
                     const finalEditorData = res ? res?.data : currentTab?.data;
 
-                    setCurrentEditorData('{{}}');
+                    setCurrentEditorData('');
                     setTimeout(() => {
                         setCurrentEditorData(finalEditorData);
                     }, 0)
