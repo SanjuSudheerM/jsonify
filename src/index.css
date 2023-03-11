@@ -30,6 +30,7 @@ code {
 .container {
     max-width: 1280px;
     margin: 0 auto;
+    width: 80%;
 }
 
 .header-wrapper {
@@ -49,6 +50,16 @@ code {
 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.header-wrapper .menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.header-wrapper .menu span {
+    padding: 0 16px;
+    cursor: pointer;
 }
 
 .editor {
@@ -233,4 +244,7 @@ code {
 
 a.link {
     text-decoration: none;
+}
+a.link:active {
+    color: black;
 }
